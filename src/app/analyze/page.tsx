@@ -177,6 +177,13 @@ function AnalyzeInner() {
                   className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
                 />
               </Field>
+              <Field label={t("analyze.genderLabel")}>
+                <input
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
+                />
+              </Field>
             </div>
           )}
 
