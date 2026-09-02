@@ -34,36 +34,66 @@
       "backHome": "Back to home"
     }
   },
-  "starter": {
-    "badge": "Eazo App Starter",
-    "title": "Build your next app with Eazo",
-    "subtitle": "You now have a clean foundation with auth, data access, and platform integrations ready for your product.",
-    "steps": {
-      "readDocs": {
-        "title": "Read the docs",
-        "desc": "Open AGENTS.md and README.md to understand the template architecture.",
-        "code": "AGENTS.md + README.md"
-      },
-      "replacePage": {
-        "title": "Replace this page",
-        "desc": "Move your product UI into src/components and keep page.tsx thin.",
-        "code": "src/app/page.tsx"
-      },
-      "firstFeature": {
-        "title": "Build your first feature",
-        "desc": "Add API routes under src/app/api and call them from typed helpers.",
-        "code": "src/app/api/*"
-      },
-      "translations": {
-        "title": "Add translations",
-        "desc": "Edit en-US / zh-CN strings in src/i18n/locales. LanguageSwitcher and I18nProvider in layout.tsx are already wired.",
-        "code": "src/i18n/locales/"
-      }
+  "app": {
+    "name": "LensMuse",
+    "tagline": "One face, a full professional shoot plan."
+  },
+  "home": {
+    "eyebrow": "PORTRAIT SHOOT PLANNER",
+    "title": "Turn a face into a full shoot plan",
+    "subtitle": "Analyze features and vibe, then generate a structured plan — makeup, styling, wardrobe, scenes, per-shot detail and photographer references.",
+    "startPhoto": "Upload a photo",
+    "startPhotoDesc": "AI visual analysis of features & vibe",
+    "startText": "Describe in text",
+    "startTextDesc": "No model? Fill in a description instead",
+    "recentTitle": "Recent plans",
+    "recentEmpty": "No plans yet. Start your first one above.",
+    "openPlan": "Open plan",
+    "sourcePhoto": "Photo",
+    "sourceText": "Text"
+  },
+  "analyze": {
+    "title": "New analysis",
+    "back": "Back",
+    "tabPhoto": "Upload photo",
+    "tabText": "Text description",
+    "uploadLabel": "Upload or take a photo",
+    "uploadHint": "Front-facing, clear light works best",
+    "uploadPick": "Choose image",
+    "nameLabel": "Subject name",
+    "namePlaceholder": "e.g. the model's name",
+    "faceShapeLabel": "Face shape",
+    "vibeLabel": "Vibe keywords",
+    "vibePlaceholder": "e.g. cool, editorial, urban",
+    "genderLabel": "Gender / age range",
+    "directionLabel": "Preferred style direction",
+    "directionPlaceholder": "e.g. cool urban narrative",
+    "generate": "Generate plan",
+    "generating": "Analyzing & generating…",
+    "required": "Please fill in the required fields"
+  },
+  "plan": {
+    "back": "Back",
+    "subject": "Subject",
+    "faceShape": "Face shape",
+    "source": "Source",
+    "sectionOf": "{{index}} / 8",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "shotHeaders": {
+      "scene": "Scene",
+      "camera": "Camera",
+      "framing": "Framing",
+      "light": "Light",
+      "angle": "Angle",
+      "pose": "Pose",
+      "composition": "Composition"
     },
-    "nextCommand": {
-      "title": "Next command",
-      "desc": "Start developing and iterate in real time.",
-      "command": "bun dev"
-    }
+    "caseHeaders": {
+      "style": "Style",
+      "vibe": "Signature",
+      "reference": "How to shoot"
+    },
+    "share": "Share this plan"
   }
 }
