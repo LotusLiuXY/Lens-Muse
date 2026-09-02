@@ -49,9 +49,26 @@
 }
 
 body {
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-sans), "Inter", "Helvetica Neue", Arial, sans-serif;
   /* Kill the ~300ms synthetic click delay on touch devices. */
   touch-action: manipulation;
+}
+
+/* Topographic contour overlay motif from the selected design */
+.lm-topo {
+  background-image: repeating-radial-gradient(
+    circle at 30% 20%,
+    transparent 0,
+    transparent 22px,
+    rgba(59, 56, 235, 0.05) 22px,
+    rgba(59, 56, 235, 0.05) 23px
+  );
+}
+.lm-hard-shadow {
+  box-shadow: 5px 5px 0 var(--primary);
+}
+.lm-hard-shadow-sm {
+  box-shadow: 3px 3px 0 var(--primary);
 }
 
 /* Prevent iOS WKWebView focus auto-zoom on form controls below the sm breakpoint.
