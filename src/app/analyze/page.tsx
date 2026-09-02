@@ -70,7 +70,12 @@ function AnalyzeInner() {
         gender: gender.trim() || undefined,
       });
       memory
-        .reportAction({ action: "create_shoot_plan", metadata: { type: "shoot_plan", source: mode, planId: id } })
+        .reportAction({
+          content: "User generated a shoot plan",
+          event_type: "create",
+          page: "analyze",
+          metadata: { type: "shoot_plan", source: mode, planId: id },
+        })
         .catch(() => {});
       router.push(`/plan/${id}`);
     } catch (err) {
