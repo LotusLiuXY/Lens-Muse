@@ -50,7 +50,9 @@
     "recentEmpty": "No plans yet. Start your first one above.",
     "openPlan": "Open plan",
     "sourcePhoto": "Photo",
-    "sourceText": "Text"
+    "sourceText": "Text",
+    "signInPrompt": "Sign in to generate and save your shoot plans.",
+    "loadFailed": "Couldn't load your plans."
   },
   "analyze": {
     "title": "New analysis",
@@ -70,7 +72,10 @@
     "directionPlaceholder": "e.g. cool urban narrative",
     "generate": "Generate plan",
     "generating": "Analyzing & generating…",
-    "required": "Please fill in the required fields"
+    "required": "Please fill in the required fields",
+    "uploading": "Uploading photo…",
+    "failed": "Generation failed. Please try again.",
+    "signInFirst": "Please sign in first."
   },
   "plan": {
     "back": "Back",
@@ -94,6 +99,8 @@
       "vibe": "Signature",
       "reference": "How to shoot"
     },
-    "share": "Share this plan"
+    "share": "Share this plan",
+    "notFound": "Plan not found.",
+    "loading": "Loading plan…"
   }
 }
