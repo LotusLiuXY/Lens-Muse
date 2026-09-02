@@ -4,7 +4,7 @@ import { useCallback, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { Aperture, Languages } from "lucide-react";
-import { UserBadge } from "@/components/user-profile/user-badge";
+import { AuthControl } from "@/components/shell/auth-control";
 import {
   changeLocale,
   getLocalePreference,
@@ -79,7 +79,7 @@ export function AppHeader() {
             <option value="zh-CN">{t("language.zhCN")}</option>
           </select>
         </div>
-        <UserBadge />
+        <AuthControl />
       </div>
     </header>
   );
