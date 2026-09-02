@@ -22,7 +22,9 @@ export default function PlanPage({ params }: { params: Promise<{ id: string }> }
   useEffect(() => {
     if (authLoading) return;
     let cancelled = false;
-    setStatus("loading");
+    queueMicrotask(() => {
+      if (!cancelled) setStatus("loading");
+    });
     getPlan(id)
       .then((p) => {
         if (cancelled) return;

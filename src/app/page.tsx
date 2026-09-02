@@ -24,8 +24,11 @@ export default function HomePage() {
       return;
     }
     let cancelled = false;
-    setLoading(true);
-    setFailed(false);
+    queueMicrotask(() => {
+      if (cancelled) return;
+      setLoading(true);
+      setFailed(false);
+    });
     listPlans()
       .then((rows) => {
         if (!cancelled) setPlans(rows);
