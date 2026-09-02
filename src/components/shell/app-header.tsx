@@ -4,6 +4,7 @@ import { useCallback, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { Aperture, Languages } from "lucide-react";
+import { UserBadge } from "@/components/user-profile/user-badge";
 import {
   changeLocale,
   getLocalePreference,
@@ -60,22 +61,25 @@ export function AppHeader() {
         </span>
       </Link>
 
-      <div className="flex items-center gap-1.5 border border-border bg-card px-2 py-1">
-        <Languages className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
-        <label htmlFor="app-locale" className="sr-only">
-          {t("language.label")}
-        </label>
-        <select
-          id="app-locale"
-          data-el="app-header-locale"
-          value={preference}
-          onChange={(e) => void handleChange(e.target.value)}
-          className="cursor-pointer bg-transparent font-mono text-xs font-medium text-foreground outline-none"
-        >
-          <option value="system">{t("language.followSystem")}</option>
-          <option value="en-US">{t("language.enUS")}</option>
-          <option value="zh-CN">{t("language.zhCN")}</option>
-        </select>
+      <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 border border-border bg-card px-2 py-1">
+          <Languages className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
+          <label htmlFor="app-locale" className="sr-only">
+            {t("language.label")}
+          </label>
+          <select
+            id="app-locale"
+            data-el="app-header-locale"
+            value={preference}
+            onChange={(e) => void handleChange(e.target.value)}
+            className="cursor-pointer bg-transparent font-mono text-xs font-medium text-foreground outline-none"
+          >
+            <option value="system">{t("language.followSystem")}</option>
+            <option value="en-US">{t("language.enUS")}</option>
+            <option value="zh-CN">{t("language.zhCN")}</option>
+          </select>
+        </div>
+        <UserBadge />
       </div>
     </header>
   );
