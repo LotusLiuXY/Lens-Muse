@@ -144,7 +144,8 @@ export async function generatePlan(
       { role: "user", content },
     ],
     viewer_user_id: viewerUserId,
-    params: { temperature: 0.7, max_tokens: 2600 },
+    temperature: 0.7,
+    max_tokens: 2600,
   });
 
   const text = result?.choices?.[0]?.message?.content ?? "";
