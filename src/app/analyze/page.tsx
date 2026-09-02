@@ -199,7 +199,7 @@ function AnalyzeInner() {
             className="flex w-full items-center justify-center gap-2 border-2 border-foreground bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground lm-hard-shadow-sm transition-transform active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-70"
           >
             <Sparkles className="h-4 w-4" aria-hidden />
-            {submitting ? t("analyze.generating") : t("analyze.generate")}
+            {submitting ? busyLabel || t("analyze.generating") : t("analyze.generate")}
           </button>
         </div>
       </main>
