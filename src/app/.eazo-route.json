@@ -1,0 +1,8 @@
+{
+  "route": "",
+  "name": "起点",
+  "nav_type": "tab",
+  "order_index": 0,
+  "icon": "sparkles",
+  "summary": "选择上传照片或文字描述作为起点，展示最近方案"
+}

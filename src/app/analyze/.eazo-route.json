@@ -1,0 +1,9 @@
+{
+  "route": "analyze",
+  "name": "分析",
+  "nav_type": "stack",
+  "parent": "",
+  "order_index": 1,
+  "icon": "scan-face",
+  "summary": "上传照片或填写结构化描述，启动分析"
+}
