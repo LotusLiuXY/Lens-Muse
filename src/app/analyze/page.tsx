@@ -1,0 +1,179 @@
+"use client";
+
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
+import { ArrowLeft, Camera, PenLine, Upload, Sparkles } from "lucide-react";
+import { AppHeader } from "@/components/shell/app-header";
+import { MOCK_PLANS } from "@/lib/plan/mock";
+
+type Mode = "photo" | "text";
+
+function AnalyzeInner() {
+  const { t } = useTranslation();
+  const router = useRouter();
+  const params = useSearchParams();
+  const initialMode: Mode = params.get("mode") === "text" ? "text" : "photo";
+
+  const [mode, setMode] = useState<Mode>(initialMode);
+  const [name, setName] = useState("");
+  const [faceShape, setFaceShape] = useState("");
+  const [vibe, setVibe] = useState("");
+  const [direction, setDirection] = useState("");
+  const [photoName, setPhotoName] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(false);
+
+  function canSubmit() {
+    if (mode === "photo") return photoName.length > 0;
+    return name.trim().length > 0 && faceShape.trim().length > 0;
+  }
+
+  function handleGenerate() {
+    if (!canSubmit()) {
+      setError(true);
+      return;
+    }
+    setError(false);
+    setSubmitting(true);
+    // Frontend stage: route to a sample plan. Real generation is wired next.
+    const target = mode === "photo" ? MOCK_PLANS[0] : MOCK_PLANS[1];
+    setTimeout(() => router.push(`/plan/${target.id}`), 900);
+  }
+
+  return (
+    <div className="flex min-h-full flex-col bg-background">
+      <AppHeader />
+      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-10 pt-4" data-el="analyze-main">
+        <button
+          type="button"
+          onClick={() => router.push("/")}
+          data-el="analyze-back"
+          className="mb-4 inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" aria-hidden />
+          {t("analyze.back")}
+        </button>
+
+        <h1 className="text-xl font-semibold text-foreground">{t("analyze.title")}</h1>
+
+        {/* Mode tabs */}
+        <div className="mt-4 grid grid-cols-2 gap-0 border-2 border-foreground" data-el="analyze-tabs">
+          {(["photo", "text"] as const).map((m, i) => {
+            const active = mode === m;
+            return (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setMode(m)}
+                data-el={`analyze-tab-${m}`}
+                className={`flex items-center justify-center gap-1.5 px-3 py-2.5 text-sm font-semibold transition-colors ${
+                  i === 0 ? "border-r-2 border-foreground" : ""
+                } ${active ? "bg-primary text-primary-foreground" : "bg-card text-foreground"}`}
+              >
+                {m === "photo" ? (
+                  <Camera className="h-4 w-4" aria-hidden />
+                ) : (
+                  <PenLine className="h-4 w-4" aria-hidden />
+                )}
+                {m === "photo" ? t("analyze.tabPhoto") : t("analyze.tabText")}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-5 space-y-4">
+          {mode === "photo" ? (
+            <label
+              data-el="analyze-upload"
+              className="flex cursor-pointer flex-col items-center justify-center gap-2 border-2 border-dashed border-border bg-card px-4 py-10 text-center"
+            >
+              <Upload className="h-7 w-7 text-primary" aria-hidden />
+              <span className="text-sm font-semibold text-foreground">
+                {t("analyze.uploadLabel")}
+              </span>
+              <span className="text-xs text-muted-foreground">{t("analyze.uploadHint")}</span>
+              <span className="mt-1 border border-foreground bg-background px-3 py-1 font-mono text-xs">
+                {photoName || t("analyze.uploadPick")}
+              </span>
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => setPhotoName(e.target.files?.[0]?.name ?? "")}
+              />
+            </label>
+          ) : (
+            <div className="space-y-4" data-el="analyze-text-form">
+              <Field label={t("analyze.nameLabel")}>
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={t("analyze.namePlaceholder")}
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
+                />
+              </Field>
+              <Field label={t("analyze.faceShapeLabel")}>
+                <input
+                  value={faceShape}
+                  onChange={(e) => setFaceShape(e.target.value)}
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
+                />
+              </Field>
+              <Field label={t("analyze.vibeLabel")}>
+                <input
+                  value={vibe}
+                  onChange={(e) => setVibe(e.target.value)}
+                  placeholder={t("analyze.vibePlaceholder")}
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
+                />
+              </Field>
+              <Field label={t("analyze.directionLabel")}>
+                <input
+                  value={direction}
+                  onChange={(e) => setDirection(e.target.value)}
+                  placeholder={t("analyze.directionPlaceholder")}
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
+                />
+              </Field>
+            </div>
+          )}
+
+          {error && (
+            <p className="text-xs font-medium text-destructive">{t("analyze.required")}</p>
+          )}
+
+          <button
+            type="button"
+            onClick={handleGenerate}
+            disabled={submitting}
+            data-el="analyze-generate"
+            className="flex w-full items-center justify-center gap-2 border-2 border-foreground bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground lm-hard-shadow-sm transition-transform active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-70"
+          >
+            <Sparkles className="h-4 w-4" aria-hidden />
+            {submitting ? t("analyze.generating") : t("analyze.generate")}
+          </button>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+        {label}
+      </span>
+      {children}
+    </label>
+  );
+}
+
+export default function AnalyzePage() {
+  return (
+    <Suspense fallback={null}>
+      <AnalyzeInner />
+    </Suspense>
+  );
+}
