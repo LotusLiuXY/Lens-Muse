@@ -6,5 +6,5 @@
   "order_index": 2,
   "icon": "list-ordered",
   "summary": "编号章节拍摄规格清单，可展开分点位细节",
-  "preview_route": "plan/demo-liyao"
+  "preview_route": "plan/preview"
 }
