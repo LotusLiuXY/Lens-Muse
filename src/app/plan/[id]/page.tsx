@@ -74,7 +74,7 @@ export default function PlanPage({ params }: { params: Promise<{ id: string }> }
               className="flex gap-4 border-2 border-foreground bg-card p-3 lm-hard-shadow"
               data-el="plan-summary"
             >
-              <div className="relative h-24 w-20 shrink-0 overflow-hidden border border-border bg-muted">
+              <div className="lm-portrait-overlay relative h-24 w-20 shrink-0 overflow-hidden border border-border bg-muted">
                 {plan.coverImageUrl ? (
                   <Image
                     src={plan.coverImageUrl}

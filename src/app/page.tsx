@@ -52,7 +52,7 @@ export default function HomePage() {
         <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
           {t("home.eyebrow")}
         </p>
-        <h1 className="mt-2 text-[26px] font-semibold leading-tight text-foreground">
+        <h1 className="mt-2 text-[26px] font-extrabold leading-tight tracking-tight text-foreground">
           {t("home.title")}
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
