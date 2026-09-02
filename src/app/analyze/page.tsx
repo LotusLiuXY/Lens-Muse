@@ -3,7 +3,7 @@
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { storage, auth } from "@eazo/sdk";
+import { storage, auth, memory } from "@eazo/sdk";
 import { useEazo } from "@eazo/sdk/react";
 import { toast } from "sonner";
 import { ArrowLeft, Camera, PenLine, Upload, Sparkles } from "lucide-react";
@@ -69,6 +69,9 @@ function AnalyzeInner() {
         direction: direction.trim() || undefined,
         gender: gender.trim() || undefined,
       });
+      memory
+        .reportAction({ action: "create_shoot_plan", metadata: { type: "shoot_plan", source: mode, planId: id } })
+        .catch(() => {});
       router.push(`/plan/${id}`);
     } catch (err) {
       if (err instanceof AppAIClientUnavailableError) {
