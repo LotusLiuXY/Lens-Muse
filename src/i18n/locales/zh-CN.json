@@ -34,36 +34,66 @@
       "backHome": "返回首页"
     }
   },
-  "starter": {
-    "badge": "Eazo 应用模板",
-    "title": "用 Eazo 构建你的下一个应用",
-    "subtitle": "你现在拥有干净的基础：认证、数据访问与平台能力已就绪，可直接开发产品功能。",
-    "steps": {
-      "readDocs": {
-        "title": "阅读文档",
-        "desc": "打开 AGENTS.md 与 README.md，了解模板架构与约定。",
-        "code": "AGENTS.md + README.md"
-      },
-      "replacePage": {
-        "title": "替换本页",
-        "desc": "将产品 UI 放到 src/components 下，并保持 page.tsx 为薄入口。",
-        "code": "src/app/page.tsx"
-      },
-      "firstFeature": {
-        "title": "开发第一个功能",
-        "desc": "在 src/app/api 添加接口，并通过 src/lib/api 中的类型化 helper 调用。",
-        "code": "src/app/api/*"
-      },
-      "translations": {
-        "title": "补充翻译",
-        "desc": "在 src/i18n/locales 编辑中英文文案；layout 已接入 LanguageSwitcher 与 I18nProvider。",
-        "code": "src/i18n/locales/"
-      }
+  "app": {
+    "name": "LensMuse",
+    "tagline": "给一张脸，生成一整套专业拍摄方案。"
+  },
+  "home": {
+    "eyebrow": "人像拍摄方案生成器",
+    "title": "把一张脸，变成一整套拍摄方案",
+    "subtitle": "分析五官与气质，生成结构化方案——妆容、造型、服装、场景、分点位细节与摄影师风格案例。",
+    "startPhoto": "上传照片",
+    "startPhotoDesc": "AI 视觉分析五官与气质",
+    "startText": "文字描述",
+    "startTextDesc": "没有模特？填写描述即可",
+    "recentTitle": "最近方案",
+    "recentEmpty": "还没有方案，从上方开始你的第一份。",
+    "openPlan": "查看方案",
+    "sourcePhoto": "照片",
+    "sourceText": "文字"
+  },
+  "analyze": {
+    "title": "新建分析",
+    "back": "返回",
+    "tabPhoto": "上传照片",
+    "tabText": "文字描述",
+    "uploadLabel": "上传或拍摄照片",
+    "uploadHint": "正面、光线清晰的照片效果最佳",
+    "uploadPick": "选择图片",
+    "nameLabel": "人物名称",
+    "namePlaceholder": "例如：模特的名字",
+    "faceShapeLabel": "脸型",
+    "vibeLabel": "气质关键词",
+    "vibePlaceholder": "例如：清冷、高级、都市",
+    "genderLabel": "性别 / 年龄段",
+    "directionLabel": "想要的风格方向",
+    "directionPlaceholder": "例如：都市清冷叙事",
+    "generate": "生成方案",
+    "generating": "分析并生成中…",
+    "required": "请填写必填项"
+  },
+  "plan": {
+    "back": "返回",
+    "subject": "人物",
+    "faceShape": "脸型",
+    "source": "来源",
+    "sectionOf": "第 {{index}} / 8 章",
+    "expand": "展开",
+    "collapse": "收起",
+    "shotHeaders": {
+      "scene": "场景",
+      "camera": "机位",
+      "framing": "景别",
+      "light": "光线",
+      "angle": "角度",
+      "pose": "姿势引导",
+      "composition": "构图要点"
     },
-    "nextCommand": {
-      "title": "下一步命令",
-      "desc": "启动开发服务器，实时迭代你的产品。",
-      "command": "bun dev"
-    }
+    "caseHeaders": {
+      "style": "风格",
+      "vibe": "代表特征",
+      "reference": "拍法要点"
+    },
+    "share": "分享这份方案"
   }
 }
