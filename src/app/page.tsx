@@ -1,73 +1,121 @@
-// EAZO_TEMPLATE_PLACEHOLDER_PAGE
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { UserBadge } from "@/components/user-profile/user-badge";
-import { LanguageSwitcher } from "@/components/i18n/language-switcher";
+import { Camera, PenLine, ArrowRight } from "lucide-react";
+import { AppHeader } from "@/components/shell/app-header";
+import { MOCK_PLANS } from "@/lib/plan/mock";
 
-const STEP_KEYS = [
-  "readDocs",
-  "replacePage",
-  "firstFeature",
-  "translations",
-] as const;
-
-export default function Home() {
+export default function HomePage() {
   const { t } = useTranslation();
+  const plans = MOCK_PLANS;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,theme(colors.orange.500/0.18),transparent_50%)]"
-      />
+    <div className="flex min-h-full flex-col bg-background lm-topo">
+      <AppHeader />
 
-      <header className="absolute right-4 top-4 z-10 flex items-center gap-2">
-        <LanguageSwitcher />
-        <UserBadge />
-      </header>
+      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-10 pt-6" data-el="home-main">
+        <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
+          {t("home.eyebrow")}
+        </p>
+        <h1 className="mt-2 text-[26px] font-semibold leading-tight text-foreground">
+          {t("home.title")}
+        </h1>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          {t("home.subtitle")}
+        </p>
 
-      <main className="relative z-10 mx-auto flex min-h-screen w-full max-w-5xl flex-col justify-center gap-10 px-6 py-20 md:px-10">
-        <section className="space-y-4 text-center md:text-left">
-          <span className="inline-flex rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 text-xs font-medium text-orange-600 dark:text-orange-300">
-            {t("starter.badge")}
-          </span>
-          <h1 className="text-4xl font-semibold tracking-tight text-balance md:text-5xl">
-            {t("starter.title")}
-          </h1>
-          <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
-            {t("starter.subtitle")}
-          </p>
-        </section>
+        <div className="mt-6 space-y-3" data-el="home-start-options">
+          <Link
+            href="/analyze?mode=photo"
+            data-el="home-start-photo"
+            className="flex items-center gap-3 border-2 border-foreground bg-card p-4 lm-hard-shadow transition-transform active:translate-x-0.5 active:translate-y-0.5"
+          >
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center bg-primary text-primary-foreground">
+              <Camera className="h-5 w-5" aria-hidden />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-base font-semibold text-foreground">
+                {t("home.startPhoto")}
+              </span>
+              <span className="block text-xs text-muted-foreground">
+                {t("home.startPhotoDesc")}
+              </span>
+            </span>
+            <ArrowRight className="h-5 w-5 shrink-0 text-foreground" aria-hidden />
+          </Link>
 
-        <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {STEP_KEYS.map((key) => (
-            <article
-              key={key}
-              className="rounded-2xl border bg-card/60 p-5 shadow-sm backdrop-blur"
-            >
-              <h2 className="text-base font-medium">
-                {t(`starter.steps.${key}.title`)}
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                {t(`starter.steps.${key}.desc`)}
-              </p>
-              <code className="mt-4 inline-block rounded-md bg-muted px-2 py-1 text-xs text-muted-foreground">
-                {t(`starter.steps.${key}.code`)}
-              </code>
-            </article>
-          ))}
-        </section>
+          <Link
+            href="/analyze?mode=text"
+            data-el="home-start-text"
+            className="flex items-center gap-3 border-2 border-foreground bg-card p-4 lm-hard-shadow transition-transform active:translate-x-0.5 active:translate-y-0.5"
+          >
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center bg-secondary text-secondary-foreground">
+              <PenLine className="h-5 w-5" aria-hidden />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-base font-semibold text-foreground">
+                {t("home.startText")}
+              </span>
+              <span className="block text-xs text-muted-foreground">
+                {t("home.startTextDesc")}
+              </span>
+            </span>
+            <ArrowRight className="h-5 w-5 shrink-0 text-foreground" aria-hidden />
+          </Link>
+        </div>
 
-        <section className="rounded-2xl border bg-card/50 p-5 md:p-6">
-          <h3 className="text-sm font-medium">{t("starter.nextCommand.title")}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {t("starter.nextCommand.desc")}
-          </p>
-          <pre className="mt-4 overflow-x-auto rounded-lg bg-muted p-3 text-sm">
-            <code>{t("starter.nextCommand.command")}</code>
-          </pre>
-        </section>
+        <div className="mt-8" data-el="home-recent">
+          <h2 className="mb-3 font-mono text-xs font-semibold uppercase tracking-wide text-foreground">
+            {t("home.recentTitle")}
+          </h2>
+          {plans.length === 0 ? (
+            <p className="border border-dashed border-border p-4 text-sm text-muted-foreground">
+              {t("home.recentEmpty")}
+            </p>
+          ) : (
+            <ul className="space-y-2.5">
+              {plans.map((p) => (
+                <li key={p.id}>
+                  <Link
+                    href={`/plan/${p.id}`}
+                    data-el="home-recent-item"
+                    className="flex items-center gap-3 border border-border bg-card p-2.5 transition-colors hover:border-foreground"
+                  >
+                    <span className="relative h-14 w-12 shrink-0 overflow-hidden border border-border bg-muted">
+                      {p.coverImageUrl && (
+                        <Image
+                          src={p.coverImageUrl}
+                          alt={p.subjectName}
+                          fill
+                          sizes="48px"
+                          className="object-cover"
+                        />
+                      )}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-sm font-semibold text-foreground">
+                        {p.subjectName}
+                      </span>
+                      <span className="mt-0.5 flex flex-wrap gap-1">
+                        <span className="bg-accent/60 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-accent-foreground">
+                          {p.source === "photo"
+                            ? t("home.sourcePhoto")
+                            : t("home.sourceText")}
+                        </span>
+                        <span className="px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                          {p.faceShape}
+                        </span>
+                      </span>
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </main>
     </div>
   );
