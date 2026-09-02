@@ -3,9 +3,13 @@
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { storage, auth } from "@eazo/sdk";
+import { useEazo } from "@eazo/sdk/react";
+import { toast } from "sonner";
 import { ArrowLeft, Camera, PenLine, Upload, Sparkles } from "lucide-react";
 import { AppHeader } from "@/components/shell/app-header";
-import { MOCK_PLANS } from "@/lib/plan/mock";
+import { generatePlan } from "@/lib/api";
+import { AppAIClientUnavailableError } from "@/lib/api/app-ai-request";
 
 type Mode = "photo" | "text";
 
@@ -14,31 +18,68 @@ function AnalyzeInner() {
   const router = useRouter();
   const params = useSearchParams();
   const initialMode: Mode = params.get("mode") === "text" ? "text" : "photo";
+  const user = useEazo((s) => s.auth.user);
 
   const [mode, setMode] = useState<Mode>(initialMode);
   const [name, setName] = useState("");
   const [faceShape, setFaceShape] = useState("");
   const [vibe, setVibe] = useState("");
   const [direction, setDirection] = useState("");
-  const [photoName, setPhotoName] = useState("");
+  const [gender, setGender] = useState("");
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [busyLabel, setBusyLabel] = useState("");
   const [error, setError] = useState(false);
 
   function canSubmit() {
-    if (mode === "photo") return photoName.length > 0;
+    if (mode === "photo") return photoFile !== null;
     return name.trim().length > 0 && faceShape.trim().length > 0;
   }
 
-  function handleGenerate() {
+  async function handleGenerate() {
     if (!canSubmit()) {
       setError(true);
       return;
     }
     setError(false);
+
+    if (!user) {
+      toast.error(t("analyze.signInFirst"));
+      auth.login().catch(() => undefined);
+      return;
+    }
+
     setSubmitting(true);
-    // Frontend stage: route to a sample plan. Real generation is wired next.
-    const target = mode === "photo" ? MOCK_PLANS[0] : MOCK_PLANS[1];
-    setTimeout(() => router.push(`/plan/${target.id}`), 900);
+    try {
+      let imageUrl: string | undefined;
+      if (mode === "photo" && photoFile) {
+        setBusyLabel(t("analyze.uploading"));
+        const path = `portraits/${user.id}/${Date.now()}-${photoFile.name}`;
+        const uploaded = await storage.upload(path, photoFile);
+        imageUrl = uploaded.url;
+      }
+
+      setBusyLabel(t("analyze.generating"));
+      const { id } = await generatePlan({
+        source: mode,
+        name: name.trim() || undefined,
+        imageUrl,
+        faceShape: faceShape.trim() || undefined,
+        vibe: vibe.trim() || undefined,
+        direction: direction.trim() || undefined,
+        gender: gender.trim() || undefined,
+      });
+      router.push(`/plan/${id}`);
+    } catch (err) {
+      if (err instanceof AppAIClientUnavailableError) {
+        setSubmitting(false);
+        setBusyLabel("");
+        return;
+      }
+      toast.error(t("analyze.failed"));
+      setSubmitting(false);
+      setBusyLabel("");
+    }
   }
 
   return (
@@ -94,13 +135,13 @@ function AnalyzeInner() {
               </span>
               <span className="text-xs text-muted-foreground">{t("analyze.uploadHint")}</span>
               <span className="mt-1 border border-foreground bg-background px-3 py-1 font-mono text-xs">
-                {photoName || t("analyze.uploadPick")}
+                {photoFile?.name || t("analyze.uploadPick")}
               </span>
               <input
                 type="file"
                 accept="image/*"
                 className="hidden"
-                onChange={(e) => setPhotoName(e.target.files?.[0]?.name ?? "")}
+                onChange={(e) => setPhotoFile(e.target.files?.[0] ?? null)}
               />
             </label>
           ) : (
