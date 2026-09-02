@@ -21,7 +21,6 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!user) {
-      setPlans([]);
       return;
     }
     let cancelled = false;
