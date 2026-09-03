@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Script from "next/script";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { Inter, Inter_Tight } from "next/font/google";
 import { EazoProvider } from "@eazo/sdk/react";
 import { cn } from "@/utils/utils";
 import { Toaster } from "@/components/ui/sonner";
@@ -12,10 +12,10 @@ import { PreviewInspector } from "@/components/eazo/preview-inspector";
 import { getServerLocale } from "@/lib/i18n/server-preference";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const plexMono = IBM_Plex_Mono({
+const interTight = Inter_Tight({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mono",
+  weight: ["400", "600", "700", "800"],
+  variable: "--font-heading",
 });
 
 const SITE_URL = process.env.VERCEL_URL
