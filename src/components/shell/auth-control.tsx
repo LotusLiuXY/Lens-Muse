@@ -40,7 +40,7 @@ export function AuthControl() {
         type="button"
         data-el="auth-control-signin"
         onClick={() => auth.login().catch(() => undefined)}
-        className="flex items-center gap-1.5 border-2 border-foreground bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground lm-hard-shadow-sm transition-transform active:translate-x-0.5 active:translate-y-0.5"
+        className="flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground lm-soft-shadow transition-transform active:scale-95"
       >
         <LogIn className="h-3.5 w-3.5" aria-hidden />
         {t("common.signIn")}
@@ -57,7 +57,7 @@ export function AuthControl() {
         data-el="auth-control-badge"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 border border-foreground bg-card px-2 py-1"
+        className="flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-2 py-1"
       >
         <Avatar user={user} size={20} />
         <span className="max-w-[92px] truncate text-xs font-medium text-foreground">
@@ -68,9 +68,9 @@ export function AuthControl() {
       {open && (
         <div
           data-el="auth-control-menu"
-          className="absolute right-0 top-full z-50 mt-2 w-56 border-2 border-foreground bg-card lm-hard-shadow-sm"
+          className="absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-border bg-card lm-soft-shadow"
         >
-          <div className="flex items-center gap-2.5 border-b-2 border-dashed border-border px-3 py-3">
+          <div className="flex items-center gap-2.5 border-b border-border px-3 py-3">
             <Avatar user={user} size={36} />
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold text-foreground">
