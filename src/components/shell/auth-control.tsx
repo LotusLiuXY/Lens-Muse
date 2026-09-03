@@ -114,7 +114,7 @@ function Avatar({
         alt={user.name ?? "avatar"}
         width={size}
         height={size}
-        className="border border-border object-cover"
+        className="rounded-full border border-border object-cover"
         style={{ width: size, height: size }}
       />
     );
@@ -122,7 +122,7 @@ function Avatar({
   const initial = (user.name ?? user.email ?? "?")[0]?.toUpperCase() ?? "?";
   return (
     <span
-      className="flex shrink-0 items-center justify-center bg-primary/10 font-semibold text-primary"
+      className="flex shrink-0 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary"
       style={{ width: size, height: size, fontSize: size * 0.42 }}
     >
       {initial === "?" ? <UserRound className="h-3.5 w-3.5" aria-hidden /> : initial}
