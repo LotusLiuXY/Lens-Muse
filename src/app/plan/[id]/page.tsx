@@ -43,27 +43,27 @@ export default function PlanPage({ params }: { params: Promise<{ id: string }> }
   }, [id, authLoading, user]);
 
   return (
-    <div className="flex min-h-full flex-col bg-background">
+    <div className="lm-mesh flex min-h-full flex-col">
       <AppHeader />
 
-      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-12 pt-4" data-el="plan-main">
+      <main className="relative z-[1] mx-auto w-full max-w-md flex-1 px-4 pb-12 pt-4" data-el="plan-main">
         <Link
           href="/"
           data-el="plan-back"
-          className="mb-4 inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
+          className="mb-4 inline-flex items-center gap-1.5 text-xs text-muted-foreground"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden />
           {t("plan.back")}
         </Link>
 
         {status === "loading" && (
-          <p className="border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
+          <p className="rounded-2xl border border-dashed border-border bg-card/70 p-6 text-center text-sm text-muted-foreground">
             {t("plan.loading")}
           </p>
         )}
 
         {status === "notfound" && (
-          <p className="border border-dashed border-border p-6 text-center text-sm text-muted-foreground">
+          <p className="rounded-2xl border border-dashed border-border bg-card/70 p-6 text-center text-sm text-muted-foreground">
             {t("plan.notFound")}
           </p>
         )}
@@ -71,11 +71,11 @@ export default function PlanPage({ params }: { params: Promise<{ id: string }> }
         {status === "ready" && plan && (
           <>
             <div
-              className="flex gap-4 border-2 border-foreground bg-card p-3 lm-hard-shadow"
+              className="flex gap-4 rounded-2xl lm-glass p-3"
               data-el="plan-summary"
             >
               <div
-                className={`relative h-24 w-20 shrink-0 overflow-hidden border border-border bg-muted ${plan.coverImageUrl ? "lm-portrait-overlay" : ""}`}
+                className="relative h-24 w-20 shrink-0 overflow-hidden rounded-xl border border-border bg-muted"
               >
                 {plan.coverImageUrl ? (
                   <Image
@@ -86,16 +86,16 @@ export default function PlanPage({ params }: { params: Promise<{ id: string }> }
                     className="object-cover"
                   />
                 ) : (
-                  <span className="flex h-full items-center justify-center font-mono text-[10px] text-muted-foreground">
+                  <span className="flex h-full items-center justify-center text-[10px] text-muted-foreground">
                     {t("home.sourceText")}
                   </span>
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <div className="font-mono text-[10px] uppercase tracking-wide text-muted-foreground">
+                <div className="font-heading text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
                   {t("plan.subject")}
                 </div>
-                <div className="truncate text-lg font-semibold text-foreground">
+                <div className="truncate font-heading text-lg font-extrabold text-foreground">
                   {plan.subjectName}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground">
@@ -105,7 +105,7 @@ export default function PlanPage({ params }: { params: Promise<{ id: string }> }
                   {plan.temperamentTags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-accent/60 px-1.5 py-0.5 font-mono text-[10px] text-accent-foreground"
+                      className="rounded-full bg-accent/60 px-2 py-0.5 text-[10px] text-accent-foreground"
                     >
                       {tag}
                     </span>
