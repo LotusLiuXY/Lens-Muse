@@ -90,3 +90,15 @@ bun run dev
 ## 📄 许可证
 
 本项目基于 [MIT License](./LICENSE) 开源。
+
+## 🔗 链接汇总
+
+| 用途 | 链接 |
+|---|---|
+| 线上地址（Vercel） | https://lens-muse-60bbc5da.eazo.dev |
+| 沙盒预览（E2B） | https://3000-iaa75j5qfkcxi1v47mtuz.e2b.app |
+| 代码仓库（GitHub） | https://github.com/LotusLiuXY/Lens-Muse |
+| README | https://github.com/LotusLiuXY/Lens-Muse/blob/main/README.md |
+| 开源许可证（MIT） | https://github.com/LotusLiuXY/Lens-Muse/blob/main/LICENSE |
+| Vercel 导入部署 | https://vercel.com/new |
+| Vercel 控制台 | https://vercel.com/dashboard |
