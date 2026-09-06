@@ -49,20 +49,20 @@ export function AppHeader() {
   return (
     <header
       data-el="app-header"
-      className="lm-glass sticky top-0 z-30 flex items-center justify-between border-b border-border/60 px-4"
+      className="sticky top-0 z-30 flex items-center justify-between border-b-2 border-foreground bg-background px-4"
       style={{ paddingTop: "max(12px, env(safe-area-inset-top, 0px))", paddingBottom: 12 }}
     >
       <Link href="/" data-el="app-header-logo" className="flex items-center gap-2">
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground">
+        <span className="flex h-7 w-7 items-center justify-center bg-primary text-primary-foreground">
           <Aperture className="h-4 w-4" aria-hidden />
         </span>
-        <span className="font-heading text-sm font-extrabold tracking-tight text-foreground">
+        <span className="font-mono text-sm font-semibold tracking-tight text-foreground">
           {t("app.name")}
         </span>
       </Link>
 
       <div className="flex items-center gap-2">
-        <div className="flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-2.5 py-1">
+        <div className="flex items-center gap-1.5 border border-border bg-card px-2 py-1">
           <Languages className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
           <label htmlFor="app-locale" className="sr-only">
             {t("language.label")}
@@ -72,7 +72,7 @@ export function AppHeader() {
             data-el="app-header-locale"
             value={preference}
             onChange={(e) => void handleChange(e.target.value)}
-            className="cursor-pointer bg-transparent text-xs font-medium text-foreground outline-none"
+            className="cursor-pointer bg-transparent font-mono text-xs font-medium text-foreground outline-none"
           >
             <option value="system">{t("language.followSystem")}</option>
             <option value="en-US">{t("language.enUS")}</option>
