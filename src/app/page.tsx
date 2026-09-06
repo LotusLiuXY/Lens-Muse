@@ -45,14 +45,14 @@ export default function HomePage() {
   }, [user]);
 
   return (
-    <div className="lm-mesh flex min-h-full flex-col">
+    <div className="flex min-h-full flex-col bg-background lm-topo">
       <AppHeader />
 
-      <main className="relative z-[1] mx-auto w-full max-w-md flex-1 px-4 pb-10 pt-6" data-el="home-main">
-        <p className="font-heading text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-10 pt-6" data-el="home-main">
+        <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
           {t("home.eyebrow")}
         </p>
-        <h1 className="mt-2 font-heading text-[30px] font-extrabold leading-[1.02] tracking-tight text-foreground">
+        <h1 className="mt-2 text-[26px] font-extrabold leading-tight tracking-tight text-foreground">
           {t("home.title")}
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -63,13 +63,13 @@ export default function HomePage() {
           <Link
             href="/analyze?mode=photo"
             data-el="home-start-photo"
-            className="flex items-center gap-3 rounded-2xl lm-glass p-4 transition-transform active:scale-[0.98]"
+            className="flex items-center gap-3 border-2 border-foreground bg-card p-4 lm-hard-shadow transition-transform active:translate-x-0.5 active:translate-y-0.5"
           >
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center bg-primary text-primary-foreground">
               <Camera className="h-5 w-5" aria-hidden />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block font-heading text-base font-bold text-foreground">
+              <span className="block text-base font-semibold text-foreground">
                 {t("home.startPhoto")}
               </span>
               <span className="block text-xs text-muted-foreground">
@@ -82,13 +82,13 @@ export default function HomePage() {
           <Link
             href="/analyze?mode=text"
             data-el="home-start-text"
-            className="flex items-center gap-3 rounded-2xl lm-glass p-4 transition-transform active:scale-[0.98]"
+            className="flex items-center gap-3 border-2 border-foreground bg-card p-4 lm-hard-shadow transition-transform active:translate-x-0.5 active:translate-y-0.5"
           >
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-secondary text-secondary-foreground">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center bg-secondary text-secondary-foreground">
               <PenLine className="h-5 w-5" aria-hidden />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block font-heading text-base font-bold text-foreground">
+              <span className="block text-base font-semibold text-foreground">
                 {t("home.startText")}
               </span>
               <span className="block text-xs text-muted-foreground">
@@ -100,7 +100,7 @@ export default function HomePage() {
         </div>
 
         <div className="mt-8" data-el="home-recent">
-          <h2 className="mb-3 font-heading text-xs font-bold uppercase tracking-wide text-foreground">
+          <h2 className="mb-3 font-mono text-xs font-semibold uppercase tracking-wide text-foreground">
             {t("home.recentTitle")}
           </h2>
 
@@ -109,23 +109,23 @@ export default function HomePage() {
               type="button"
               onClick={() => auth.login().catch(() => undefined)}
               data-el="home-signin"
-              className="flex w-full items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-card/70 px-4 py-5 text-sm text-muted-foreground"
+              className="flex w-full items-center justify-center gap-2 border-2 border-dashed border-border bg-card px-4 py-5 text-sm text-muted-foreground"
             >
               <UserRound className="h-4 w-4" aria-hidden />
               {t("home.signInPrompt")}
             </button>
           ) : failed ? (
-            <p className="rounded-2xl border border-dashed border-border bg-card/70 p-4 text-sm text-destructive">
+            <p className="border border-dashed border-border p-4 text-sm text-destructive">
               {t("home.loadFailed")}
             </p>
           ) : loading ? (
             <ul className="space-y-2.5" aria-hidden>
               {[0, 1].map((i) => (
-                <li key={i} className="h-[76px] animate-pulse rounded-2xl border border-border bg-card/60" />
+                <li key={i} className="h-[76px] animate-pulse border border-border bg-card/60" />
               ))}
             </ul>
           ) : plans.length === 0 ? (
-            <p className="rounded-2xl border border-dashed border-border bg-card/70 p-4 text-sm text-muted-foreground">
+            <p className="border border-dashed border-border p-4 text-sm text-muted-foreground">
               {t("home.recentEmpty")}
             </p>
           ) : (
@@ -135,9 +135,9 @@ export default function HomePage() {
                   <Link
                     href={`/plan/${p.id}`}
                     data-el="home-recent-item"
-                    className="flex items-center gap-3 rounded-2xl lm-glass p-2.5 transition-transform active:scale-[0.99]"
+                    className="flex items-center gap-3 border border-border bg-card p-2.5 transition-colors hover:border-foreground"
                   >
-                    <span className="relative h-14 w-12 shrink-0 overflow-hidden rounded-xl border border-border bg-muted">
+                    <span className="relative h-14 w-12 shrink-0 overflow-hidden border border-border bg-muted">
                       {p.coverImageUrl ? (
                         <Image
                           src={p.coverImageUrl}
@@ -147,7 +147,7 @@ export default function HomePage() {
                           className="object-cover"
                         />
                       ) : (
-                        <span className="flex h-full items-center justify-center text-[10px] text-muted-foreground">
+                        <span className="flex h-full items-center justify-center font-mono text-[10px] text-muted-foreground">
                           {t("home.sourceText")}
                         </span>
                       )}
@@ -157,7 +157,7 @@ export default function HomePage() {
                         {p.subjectName}
                       </span>
                       <span className="mt-0.5 flex flex-wrap gap-1">
-                        <span className="rounded-full bg-accent/60 px-2 py-0.5 text-[10px] uppercase tracking-wide text-accent-foreground">
+                        <span className="bg-accent/60 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wide text-accent-foreground">
                           {p.source === "photo"
                             ? t("home.sourcePhoto")
                             : t("home.sourceText")}
