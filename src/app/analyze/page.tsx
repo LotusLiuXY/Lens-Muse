@@ -91,24 +91,24 @@ function AnalyzeInner() {
   }
 
   return (
-    <div className="lm-mesh flex min-h-full flex-col">
+    <div className="flex min-h-full flex-col bg-background">
       <AppHeader />
-      <main className="relative z-[1] mx-auto w-full max-w-md flex-1 px-4 pb-10 pt-4" data-el="analyze-main">
+      <main className="mx-auto w-full max-w-md flex-1 px-4 pb-10 pt-4" data-el="analyze-main">
         <button
           type="button"
           onClick={() => router.push("/")}
           data-el="analyze-back"
-          className="mb-4 inline-flex items-center gap-1.5 text-xs text-muted-foreground"
+          className="mb-4 inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden />
           {t("analyze.back")}
         </button>
 
-        <h1 className="font-heading text-xl font-extrabold text-foreground">{t("analyze.title")}</h1>
+        <h1 className="text-xl font-semibold text-foreground">{t("analyze.title")}</h1>
 
         {/* Mode tabs */}
-        <div className="mt-4 grid grid-cols-2 gap-1.5 rounded-full lm-glass p-1" data-el="analyze-tabs">
-          {(["photo", "text"] as const).map((m) => {
+        <div className="mt-4 grid grid-cols-2 gap-0 border-2 border-foreground" data-el="analyze-tabs">
+          {(["photo", "text"] as const).map((m, i) => {
             const active = mode === m;
             return (
               <button
@@ -116,9 +116,9 @@ function AnalyzeInner() {
                 type="button"
                 onClick={() => setMode(m)}
                 data-el={`analyze-tab-${m}`}
-                className={`flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-sm font-semibold transition-colors ${
-                  active ? "bg-primary text-primary-foreground" : "text-foreground"
-                }`}
+                className={`flex items-center justify-center gap-1.5 px-3 py-2.5 text-sm font-semibold transition-colors ${
+                  i === 0 ? "border-r-2 border-foreground" : ""
+                } ${active ? "bg-primary text-primary-foreground" : "bg-card text-foreground"}`}
               >
                 {m === "photo" ? (
                   <Camera className="h-4 w-4" aria-hidden />
@@ -135,14 +135,14 @@ function AnalyzeInner() {
           {mode === "photo" ? (
             <label
               data-el="analyze-upload"
-              className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-border bg-card/70 px-4 py-10 text-center"
+              className="flex cursor-pointer flex-col items-center justify-center gap-2 border-2 border-dashed border-border bg-card px-4 py-10 text-center"
             >
               <Upload className="h-7 w-7 text-primary" aria-hidden />
-              <span className="font-heading text-sm font-bold text-foreground">
+              <span className="text-sm font-semibold text-foreground">
                 {t("analyze.uploadLabel")}
               </span>
               <span className="text-xs text-muted-foreground">{t("analyze.uploadHint")}</span>
-              <span className="mt-1 rounded-full border border-border bg-background px-3 py-1 text-xs">
+              <span className="mt-1 border border-foreground bg-background px-3 py-1 font-mono text-xs">
                 {photoFile?.name || t("analyze.uploadPick")}
               </span>
               <input
@@ -159,14 +159,14 @@ function AnalyzeInner() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={t("analyze.namePlaceholder")}
-                  className="w-full rounded-xl border border-border bg-card px-3 py-2 text-sm outline-none focus:border-primary"
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
                 />
               </Field>
               <Field label={t("analyze.faceShapeLabel")}>
                 <input
                   value={faceShape}
                   onChange={(e) => setFaceShape(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-card px-3 py-2 text-sm outline-none focus:border-primary"
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
                 />
               </Field>
               <Field label={t("analyze.vibeLabel")}>
@@ -174,7 +174,7 @@ function AnalyzeInner() {
                   value={vibe}
                   onChange={(e) => setVibe(e.target.value)}
                   placeholder={t("analyze.vibePlaceholder")}
-                  className="w-full rounded-xl border border-border bg-card px-3 py-2 text-sm outline-none focus:border-primary"
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
                 />
               </Field>
               <Field label={t("analyze.directionLabel")}>
@@ -182,14 +182,14 @@ function AnalyzeInner() {
                   value={direction}
                   onChange={(e) => setDirection(e.target.value)}
                   placeholder={t("analyze.directionPlaceholder")}
-                  className="w-full rounded-xl border border-border bg-card px-3 py-2 text-sm outline-none focus:border-primary"
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
                 />
               </Field>
               <Field label={t("analyze.genderLabel")}>
                 <input
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-card px-3 py-2 text-sm outline-none focus:border-primary"
+                  className="w-full border border-border bg-card px-3 py-2 text-sm outline-none focus:border-foreground"
                 />
               </Field>
             </div>
@@ -204,7 +204,7 @@ function AnalyzeInner() {
             onClick={handleGenerate}
             disabled={submitting}
             data-el="analyze-generate"
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground lm-soft-shadow transition-transform active:scale-[0.98] disabled:opacity-70"
+            className="flex w-full items-center justify-center gap-2 border-2 border-foreground bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground lm-hard-shadow-sm transition-transform active:translate-x-0.5 active:translate-y-0.5 disabled:opacity-70"
           >
             <Sparkles className="h-4 w-4" aria-hidden />
             {submitting ? busyLabel || t("analyze.generating") : t("analyze.generate")}
@@ -218,7 +218,7 @@ function AnalyzeInner() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block font-heading text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+      <span className="mb-1.5 block font-mono text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
         {label}
       </span>
       {children}
