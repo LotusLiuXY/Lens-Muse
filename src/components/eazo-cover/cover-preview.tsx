@@ -29,13 +29,13 @@ export function CoverPreview() {
   }, []);
 
   return (
-    <div className="lm-mesh flex h-full w-full items-center justify-center p-4">
-      <div className="relative z-[1] w-full max-w-[340px]">
+    <div className="flex h-full w-full items-center justify-center bg-[#E9E9E8] p-4">
+      <div className="w-full max-w-[340px]">
         <div className="mb-3 flex items-center gap-2">
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#FF7A45] text-[#FFFDFC]">
+          <span className="flex h-6 w-6 items-center justify-center bg-[#3B38EB] text-[#FAFAF7]">
             <Aperture className="h-3.5 w-3.5" />
           </span>
-          <span className="font-heading text-sm font-extrabold text-[#1A1A1A]">{D.subject}</span>
+          <span className="font-mono text-sm font-semibold text-[#212725]">{D.subject}</span>
         </div>
 
         <div className="space-y-2">
@@ -44,24 +44,21 @@ export function CoverPreview() {
             return (
               <div
                 key={s.idx}
-                className="overflow-hidden rounded-2xl border border-[#EED8D0]"
-                style={{
-                  background: "rgba(255,253,252,0.82)",
-                  boxShadow: isTarget && open ? "5px 5px 0 #FF7A45" : "0 6px 15px rgba(146,84,75,0.09)",
-                }}
+                className="border-2 border-[#212725] bg-[#FAFAF7]"
+                style={{ boxShadow: "3px 3px 0 #3B38EB" }}
               >
                 <div className="flex items-center gap-3 px-3 py-2.5">
-                  <span className="font-heading text-base font-extrabold text-[#FF7A45]">{s.idx}</span>
+                  <span className="font-mono text-base font-semibold text-[#3B38EB]">{s.idx}</span>
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate font-heading text-sm font-extrabold text-[#1A1A1A]">
+                    <span className="block truncate text-sm font-semibold text-[#212725]">
                       {s.title}
                     </span>
-                    <span className="block text-[10px] uppercase tracking-wide text-[#775D58]">
+                    <span className="block font-mono text-[10px] uppercase tracking-wide text-[#5C6264]">
                       {s.sub}
                     </span>
                   </span>
                   <ChevronDown
-                    className="h-4 w-4 text-[#1A1A1A] transition-transform duration-300"
+                    className="h-4 w-4 text-[#212725] transition-transform duration-300"
                     style={{ transform: isTarget && open ? "rotate(180deg)" : "none" }}
                   />
                 </div>
@@ -75,13 +72,13 @@ export function CoverPreview() {
                         transition={{ duration: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
                         className="overflow-hidden"
                       >
-                        <dl className="divide-y divide-[#EED8D0] border-t border-dashed border-[#EED8D0]">
+                        <dl className="divide-y divide-[#CFCFCA] border-t-2 border-dashed border-[#CFCFCA]">
                           {D.detail.map(([k, v]) => (
                             <div key={k} className="flex gap-3 px-3 py-1.5">
-                              <dt className="w-14 shrink-0 text-[10px] uppercase leading-5 tracking-wide text-[#775D58]">
+                              <dt className="w-14 shrink-0 font-mono text-[10px] uppercase leading-5 tracking-wide text-[#5C6264]">
                                 {k}
                               </dt>
-                              <dd className="text-[13px] leading-5 text-[#1A1A1A]">{v}</dd>
+                              <dd className="text-[13px] leading-5 text-[#212725]">{v}</dd>
                             </div>
                           ))}
                         </dl>
