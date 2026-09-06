@@ -2,7 +2,9 @@
 
 输入一张人脸照片或一段文字描述，LensMuse 会分析五官与气质，生成一整套结构化的人像拍摄企划方案——涵盖五官分析、妆容、发型造型、气质定位、服装、场景、分点位拍摄细节与摄影师风格案例，共 8 个可逐段展开的章节。
 
-预览地址：https://3000-iaa75j5qfkcxi1v47mtuz.e2b.app
+- 🌐 线上地址（Vercel）：https://lens-muse-60bbc5da.eazo.dev
+- 🔍 沙盒预览（E2B）：https://3000-iaa75j5qfkcxi1v47mtuz.e2b.app
+- 📦 代码仓库（GitHub）：https://github.com/LotusLiuXY/Lens-Muse
 
 ---
 
