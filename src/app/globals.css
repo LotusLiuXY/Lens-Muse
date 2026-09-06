@@ -54,52 +54,30 @@ body {
   touch-action: manipulation;
 }
 
-/* Soft mesh aurora ground + faint grid, from the selected design "柔雾 SaaS 拼贴" */
-.lm-mesh {
-  position: relative;
-  background:
-    radial-gradient(ellipse at 12% 12%, #C9D9F6 0 10%, transparent 34%),
-    radial-gradient(ellipse at 90% 24%, #F7B18F 0 14%, transparent 42%),
-    radial-gradient(ellipse at 72% 100%, #D8C2EF 0 18%, transparent 47%),
-    var(--background);
-  background-size: 140% 140%, 120% 120%, 130% 130%;
-  animation: lm-aurora 16s ease-in-out infinite alternate;
+/* Topographic contour overlay motif from the selected design */
+.lm-topo {
+  background-image: repeating-radial-gradient(
+    circle at 30% 20%,
+    transparent 0,
+    transparent 22px,
+    rgba(59, 56, 235, 0.05) 22px,
+    rgba(59, 56, 235, 0.05) 23px
+  );
 }
-.lm-mesh::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0.15;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, transparent 49.5%, #fff 50%, transparent 50.5%),
-    linear-gradient(0deg, transparent 49.5%, #fff 50%, transparent 50.5%);
-  background-size: 28px 28px;
-}
-@keyframes lm-aurora {
-  from { background-position: 0% 0%, 100% 0%, 80% 100%; }
-  to { background-position: 15% 7%, 82% 16%, 60% 90%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .lm-mesh { animation: none; }
-}
-/* Frosted floating card surface */
-.lm-glass {
-  background: rgba(255, 253, 252, 0.78);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 14px 30px rgba(146, 84, 75, 0.12);
-}
-.lm-soft-shadow {
-  box-shadow: 0 6px 15px rgba(146, 84, 75, 0.09);
-}
-/* Orange offset shadow when a spec card is expanded/active */
 .lm-hard-shadow {
   box-shadow: 5px 5px 0 var(--primary);
 }
 .lm-hard-shadow-sm {
-  box-shadow: 2px 2px 0 var(--foreground);
+  box-shadow: 3px 3px 0 var(--primary);
+}
+/* Diagonal indigo overlay on portrait images, from the selected design */
+.lm-portrait-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, transparent 42%, rgba(59, 56, 235, 0.7) 100%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
 }
 
 /* Prevent iOS WKWebView focus auto-zoom on form controls below the sm breakpoint.
