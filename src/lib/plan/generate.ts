@@ -1,5 +1,5 @@
 import { appAi } from "@/lib/eazo-ai-billing";
-import { modelForCapability } from "@/lib/app-ai/model";
+import { modelForCapability, isAppAiConfigured } from "@/lib/app-ai/model";
 import type {
   PlanSection,
   PlanSectionKey,
